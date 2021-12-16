@@ -4,22 +4,23 @@ This function app will listen for **OneLogin API** events and will write them to
 ## Deploy the Function App Automatically
 The easiest way is via the provided ARM templates:
 
-### 1: Deploy via Azure ARM Template
+### Deploy via Azure ARM Template
 1.  Deploy the template.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy.json)
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy.json)
 
 
 2. Deploy permissions for the function to the Key Vault.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy_kv.json)
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy_kv.json)
 
 3. After you completed the ARM template Deployements [Configure your One Login WebHook](#configure-your-one-login-webhook)
 
 ## Deploy the Function App Manually
 
-### Deploy via VS Code
-    Note: You will need to prepare VS code for Azure function development.  See https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-powershell#prerequisites
+### Step 1 - Deploy via VS Code
+
+Note: You will need to prepare VS code for Azure function development. See https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-powershell#prerequisites
 
 1. Download the [Zip](https://github.com/Azure/Azure-Sentinel/blob/master/DataConnectors/OneLogin/OneLogin_logs_template.zip?raw=true) file of the Azure Funciton app from Github.
 2. Extract to a location on your local host.
@@ -50,7 +51,7 @@ The easiest way is via the provided ARM templates:
 27. Click Identity.
 28. Click On under system assigned.  Click Save.  Click Yes.
 
-### Create a Key Vault
+### Step 2 - Create a Key Vault
 1. Go to the Azure Portal.
 2. Go to the resource group that was created.  Click Add.
 3. Type Key Vault.
@@ -69,7 +70,7 @@ The easiest way is via the provided ARM templates:
 16. Click Generate.
 17. Click WorkspaceKey and copy the current version string to a temporary location.
 
-### Configure Settings for the Function
+### Step 3 - Configure Settings for the Function
 1. Go to the Azure Portal.
 2. Go to the resource group that was created. Click the Function.
 3. Click Platform Features Tab.
