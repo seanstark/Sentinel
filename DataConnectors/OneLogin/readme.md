@@ -1,10 +1,10 @@
 # Deploy a Function App for collecting OneLogin data into Azure Sentinel
 This function app will listen for **OneLogin API** events and will write them to Log Analytics on arrival.
 
-### Deploy the Function App
+## Deploy the Function App Automatically
 The easiest way is via the provided ARM templates:
 
-#### 1: Deploy via Azure ARM Template
+### 1: Deploy via Azure ARM Template
 1.  Deploy the template.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy.json)
@@ -14,13 +14,14 @@ The easiest way is via the provided ARM templates:
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy_kv.json)
 
+3. After you completed the ARM template Deployements [Configure your One Login WebHook](#configure-your-one-login-webhook)
 
-Alternatively you can deploy the elements manually.
-#### 2: Deploy via VS Code
-Note: You will need to prepare VS code for Azure function development.  See https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-powershell#prerequisites
+## Deploy the Function App Manually
+
+### Deploy via VS Code
+    Note: You will need to prepare VS code for Azure function development.  See https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-powershell#prerequisites
+
 1. Download the [Zip](https://github.com/Azure/Azure-Sentinel/blob/master/DataConnectors/OneLogin/OneLogin_logs_template.zip?raw=true) file of the Azure Funciton app from Github.
-
-
 2. Extract to a location on your local host.
 3. Open VS Code.
 4. Click File -> Open Folder.
@@ -75,24 +76,28 @@ Note: You will need to prepare VS code for Azure function development.  See http
 4. Click Configuration under General.
 5. Click edit next to workspaceKey.
 6. Update the value using the string copied from KeyVault.
-* @Microsoft.KeyVault(SecretUri=https://<dnsname>/secrets/workspaceKey/<versionstring>)
+    * @Microsoft.KeyVault(SecretUri=https://<dnsname>/secrets/workspaceKey/<versionstring>)
 7. Click Ok.
 8. Click edit next to workspaceId.
 9. Update the value with your Sentinel Workspace Id.
 10. Click Ok.
 11. Click Save.
 
-## Configure your One Login API app.
-You also need to configure your OneLogin account to sent events to your Function App. To do this go to https://Your-Tenant-Name.onelogin.com/broadcasters and log in with a user who has admin access to your OneLogin account.
-1. Select ‘Developer’ in the top right hand corner and click ‘Build App’. 
+## Configure your One Login WebHook
+You need to configure your OneLogin account to send events to your Function App. To do this go to https://Your-Tenant-Name.onelogin.com and log in with a user who has admin access to your OneLogin account.
+1. Select **Developer** in the top right hand corner
 2. Select **Webhooks** on the drop-down. 
 3. Press **New Webhooks**.
 4. Select **Event Webhook for log management**. 
-5. Under the **New Broadcaster** Window gave it friendly name, select in the format **JSON array**. 
+5. Under the **New Broadcaster** Window gave it friendly name such as **send-to-sentinel**, select in the format **JSON array**. 
 6. Set a **Function URL** name in the **Listener URL** box. 
-This should be in the format of https://FunctionAppName.azurewebsites.net/api/FunctionName<br>
-You can find this you app URL in the Azure Portal.  
-7. Click **Save** and wait for the new broadcast channel to be healthy and green. 
+    * This should be in the format of https://FunctionAppName.azurewebsites.net/api/FunctionName<br>
+    * You can find this you app URL in the Azure Portal. The FunctionName will be name of the function, by default this is OneLogin.
+7. Open a new browser tab and navigate your **function app** > **Functions** > **Select the Function Name (OneLogin)**
+8. Under **Function Keys** copy the **default key value**, we will use this in the next step.
+9. In the **Custom Headers** text box enter the **x-functions-key custom header** to use function key based authentiation
+    * This should be in the format of **x-functions-key:keyvalue** where **keyvalue** is the **Function Key Value** you retrieved from the previous step
+10. Click **Save** and wait for the new broadcast channel to be healthy and green. 
 
 
 If successfully deployed you should start to see events appear in your Azure Sentinel workspace as soon as they are generated.
