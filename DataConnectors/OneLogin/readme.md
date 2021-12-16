@@ -14,7 +14,7 @@ The easiest way is via the provided ARM templates:
 
     [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy_kv.json)
 
-3. After you completed the ARM template Deployements [Configure your One Login WebHook](#configure-your-one-login-webhook)
+3. After you completed the ARM template Deployments [Configure your One Login WebHook](#configure-your-one-login-webhook)
 
 ## Deploy the Function App Manually
 
