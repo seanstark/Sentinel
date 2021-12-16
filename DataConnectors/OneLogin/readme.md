@@ -91,7 +91,7 @@ You need to configure your OneLogin account to send events to your Function App.
 3. Press **New Webhooks**.
 4. Select **Event Webhook for log management**. 
 5. Under the **New Broadcaster** Window gave it friendly name such as **send-to-sentinel**, select in the format **JSON array**. 
-6. Open a new browser tab and navigate your **function app** > **Functions** > **Select the Function Name (OneLogin)**
+6. Open a new browser tab and navigate to your **function app** > **Functions** > **Select the Function Name (OneLogin)**
 8. Select **Get Function URL** from the top bar > Copy the function URL which contains the function key
     * Ensure that default (function key) is selected in the dropdown box
 9. In the **Listener URL** paste the function url
