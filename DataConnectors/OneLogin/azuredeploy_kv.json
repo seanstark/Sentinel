@@ -24,12 +24,7 @@
                             ],
                             "secrets": [
                                 "Get",
-                                "List",
-                                "Set",
-                                "Delete",
-                                "Recover",
-                                "Backup",
-                                "Restore"
+                                "List"
                             ],
                             "certificates": [
                             ]
