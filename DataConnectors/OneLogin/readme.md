@@ -99,5 +99,6 @@ You need to configure your OneLogin account to send events to your Function App.
 10. Click **Save** and wait for the new broadcast channel to be healthy and green. 
 
 
-If successfully deployed you should start to see events appear in your Azure Sentinel workspace as soon as they are generated.
+If successfully deployed you should start to see events appear in your Azure Sentinel workspace as soon as they are generated from OneLogin to the custom table OneLogin_CL. An easy method to generate new events is to initiate a new login request to OneLogin. The first run may take up to 5 minutes before events appear in Sentinel. 
+
 If you run into issues there are a number of options for [monitoring](https://docs.microsoft.com/en-us/azure/azure-functions/functions-monitoring?tabs=cmd) and [deugging](https://docs.microsoft.com/en-us/azure/azure-functions/functions-debug-powershell-local) your Function App.
