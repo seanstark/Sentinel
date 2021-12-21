@@ -8,10 +8,39 @@ The easiest way is via the provided ARM templates
 
 ### Deploy via Azure ARM Template
 
-1. Deploy the template.
+1. Deploy the template
+
 	[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FDataConnectors%2FOneLogin%2Fazuredeploy.json)
 
 2. After you completed the ARM template Deployment [Configure your One Login WebHook](#configure-your-one-login-webhook)
+
+## Configure your One Login WebHook
+
+You need to configure your OneLogin account to send events to your Function App. To do this go to https://Your-Tenant-Name.onelogin.com and log in with a user who has admin access to your OneLogin account.
+
+1. Select **Developer** in the top right hand corner
+
+2. Select **Webhooks** on the drop-down.
+
+3. Press **New Webhooks**.
+
+4. Select **Event Webhook for log management**.
+
+5. Under the **New Broadcaster** Window gave it friendly name such as **send-to-sentinel**, select in the format **JSON array**.
+
+6. Open a new browser tab and navigate to your **function app** > **Functions** > **Select the Function Name (OneLogin)**
+
+8. Select **Get Function URL** from the top bar > Copy the function URL which contains the function key
+
+	* Ensure that default (function key) is selected in the dropdown box
+
+9. In the **Listener URL** paste the function url
+
+10. For the **Format** select **JSON Array**
+
+10. Click **Save** and wait for the new broadcast channel to be healthy and green.
+
+If successfully deployed you should start to see events appear in your Azure Sentinel workspace as soon as they are generated from OneLogin to the custom table OneLogin_CL. An easy method to generate new events is to initiate a new login request to OneLogin. The first run may take up to 5 minutes before events appear in Sentinel.
 
 ## Deploy the Function App Manually
 
@@ -138,36 +167,6 @@ Note: You will need to prepare VS code for Azure function development. See https
 
 11. Click **Save**
 
-  
-
-## Configure your One Login WebHook
-
-You need to configure your OneLogin account to send events to your Function App. To do this go to https://Your-Tenant-Name.onelogin.com and log in with a user who has admin access to your OneLogin account.
-
-1. Select **Developer** in the top right hand corner
-
-2. Select **Webhooks** on the drop-down.
-
-3. Press **New Webhooks**.
-
-4. Select **Event Webhook for log management**.
-
-5. Under the **New Broadcaster** Window gave it friendly name such as **send-to-sentinel**, select in the format **JSON array**.
-
-6. Open a new browser tab and navigate to your **function app** > **Functions** > **Select the Function Name (OneLogin)**
-
-8. Select **Get Function URL** from the top bar > Copy the function URL which contains the function key
-
-	* Ensure that default (function key) is selected in the dropdown box
-
-9. In the **Listener URL** paste the function url
-
-10. For the **Format** select **JSON Array**
-
-10. Click **Save** and wait for the new broadcast channel to be healthy and green.
-
-  
-If successfully deployed you should start to see events appear in your Azure Sentinel workspace as soon as they are generated from OneLogin to the custom table OneLogin_CL. An easy method to generate new events is to initiate a new login request to OneLogin. The first run may take up to 5 minutes before events appear in Sentinel.
-
+12. After you completed the manual Deployment [Configure your One Login WebHook](#configure-your-one-login-webhook)
 
 If you run into issues there are a number of options for [monitoring](https://docs.microsoft.com/en-us/azure/azure-functions/functions-monitoring?tabs=cmd) and [deugging](https://docs.microsoft.com/en-us/azure/azure-functions/functions-debug-powershell-local) your Function App.
